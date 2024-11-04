@@ -28,6 +28,10 @@ export default class Tarefa {
         return this.#concluida
     }
 
+    get pendente() {
+        return !this.#concluida
+    }
+
     alternarStatus() {
         return this.concluida ? this.tornarPendente() : this.concluir()
     }

@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      backgroundImage: theme => ({
+        'img-tarefas': "url('/images/background.jpg')"
+      }),
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

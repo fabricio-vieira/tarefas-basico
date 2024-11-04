@@ -1,17 +1,34 @@
+import { useState } from "react";
+import Lista from "@/components/list/Lista";
+import tareasIniciais from '../data/mockTarefas'
+import Cabecalho from "@/components/template/Cabecalho";
+import Conteudo from "@/components/template/Conteudo";
+import Formulario from "@/components/form/Formulario";
 import Tarefa from "@/model/Tarefa";
 
-let tarefa: Tarefa = new Tarefa(1, 'Exemplo Tarefa')
-tarefa = tarefa.alternarStatus()
+
 
 export default function Home() {
+
+  const [tarefas, setTarefas] = useState(tareasIniciais)
+
+  function novaTarefaCriada(novaTarefa: Tarefa) {
+    setTarefas(tarefas.adicionarTarefas(novaTarefa))
+  }
+
   return (
     <div
-      className={`flex flex-col bg-gradient-to-tr from-purple-700 to-green-500
-        justify-center h-screen items-center text-white`}>
-      <h2>{tarefa.id}</h2>
-      <h2>{tarefa.descricao}</h2>
-      <h2>{tarefa.concluida ? 'Concluida' : 'Pendente'}</h2>
+      className={`flex flex-col bg-gradient-to-br from-slate-200 to-gray-400
+       h-screen `}>
+      <Cabecalho>
+        <Formulario novaTarefaCriada={novaTarefaCriada} />
+      </Cabecalho>
 
+      <Conteudo>
+        <Lista tarefas={tarefas} mudou={(novasTarefas) => {
+          setTarefas(novasTarefas)
+        }} />
+      </Conteudo>
     </div>
   );
 }
